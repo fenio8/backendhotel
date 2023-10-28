@@ -1,0 +1,43 @@
+{% extends "core/base.html" %} <!--{% load static %}-->
+
+{% block title %}Blog{% endblock title %}
+
+{% block content %}
+
+<section class="page-section">
+    <div class="container">
+        <div class="card text-center my-4">
+            <h2><span class="section-heading-lower">Reviews</span></h2>
+            <div class="star-rating">
+                {% for star in "12345" %}
+                <span class="{% if forloop.counter <= avg_rating %}star-fill{% else %}star-empty{% endif %}">&#9733;</span>
+                {% endfor %}
+                <span>{{ avg_rating|floatformat:1 }}</span>
+            </div>
+        </div>
+     
+        <div class="row">
+            {% for comentario in comentarios %}
+            <div class="col-md-6 col-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">User: {{ comentario.username }}</h5>
+                        <div class="star-rating">
+                            {% for star in "12345" %}
+                                <span class="{% if forloop.counter <= comentario.rating %}star-fill{% else %}star-empty{% endif %}">&#9733;</span>
+                            {% endfor %}
+                        </div>
+                        <p class="card-text">{{ comentario.comentario }}</p>
+                        <p class="extra-small-text text-muted">Created: {{ comentario.fecha_entrada }}</p>
+                        <p class="extra-small-text text-muted">Last Updated: {{ comentario.fecha_actualizacion }}</p>
+                       
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
