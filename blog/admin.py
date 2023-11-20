@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Comentario
+from .models import Comentario, TipoHabitacion
 
 
-# Registro de los modelos
 admin.site.register(Comentario)
+admin.site.register(TipoHabitacion)

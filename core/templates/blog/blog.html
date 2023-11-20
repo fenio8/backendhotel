@@ -1,4 +1,4 @@
-{% extends "core/base.html" %} <!--{% load static %}-->
+{% extends "core/base.html" %}
 
 {% block title %}Blog{% endblock title %}
 
@@ -22,6 +22,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">User: {{ comentario.username }}</h5>
+                        <p class="card-text">Room: {{ comentario.tipo_habitacion.nombre }}</p>
                         <div class="star-rating">
                             {% for star in "12345" %}
                                 <span class="{% if forloop.counter <= comentario.rating %}star-fill{% else %}star-empty{% endif %}">&#9733;</span>
@@ -30,12 +31,27 @@
                         <p class="card-text">{{ comentario.comentario }}</p>
                         <p class="extra-small-text text-muted">Created: {{ comentario.fecha_entrada }}</p>
                         <p class="extra-small-text text-muted">Last Updated: {{ comentario.fecha_actualizacion }}</p>
-                       
-
                     </div>
                 </div>
             </div>
             {% endfor %}
+        </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if comentarios.has_previous %}
+                    <a href="?page=1">&laquo; Primera</a>
+                    <a href="?page={{ comentarios.previous_page_number }}">Anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ comentarios.number }} de {{ comentarios.paginator.num_pages }}.
+                </span>
+        
+                {% if comentarios.has_next %}
+                    <a href="?page={{ comentarios.next_page_number }}">Siguiente</a>
+                    <a href="?page={{ comentarios.paginator.num_pages }}">Última &raquo;</a>
+                {% endif %}
+            </span>
         </div>
     </div>
 </section>
